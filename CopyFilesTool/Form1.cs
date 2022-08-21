@@ -83,21 +83,21 @@ namespace CopyFilesTool
                         , comboBox.Text
                     );
 
-                    if (File.Exists(fileSrc))
-                    {
-                        string fileDest = Path.ChangeExtension(
-                            System.IO.Path.Combine(textBoxTo.Text, textBoxPrefix.Text + fileToCopy)
-                            , comboBox.Text
-                        );
+                    string fileDest = Path.ChangeExtension(
+                        System.IO.Path.Combine(textBoxTo.Text, textBoxPrefix.Text + fileToCopy)
+                        , comboBox.Text
+                    );
 
+                    try
+                    {
                         System.IO.File.Copy(fileSrc, fileDest, true);
 
                         richTextBox.AppendText("Copy file: " + fileSrc + "\n");
                     }
-                    else
+                    catch 
                     {
                         richTextBox.SelectionColor = Color.Red;
-                        richTextBox.AppendText("Can not find file: " + fileSrc + "\n");
+                        richTextBox.AppendText("Can not copy file: " + fileSrc + "\n");
                         richTextBox.SelectionColor = Color.Black;
                     }
                 }
